@@ -7,6 +7,7 @@ public class Main {
         File file = new File("list.txt");
         Scanner sc = new Scanner(file);
         Dictionary dictionary = new Dictionary();
+        sc = new Scanner(file);
         while(sc.hasNextLine()) {
             dictionary.insert(sc.nextLine());
         }
