@@ -27,8 +27,13 @@ public class Dictionary {
         StringBuilder foundWord = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
             if (!characterSequence.containsChar(word.charAt(i))) {
-                // Word not found, return the list of suggested word
-                return this.suggestedWord(characterSequence).toString();
+                // Word not found, return the list of suggested words
+                List<String> suggestions = this.suggestedWord(characterSequence);
+                List<String> suggestedWords = new ArrayList<>();
+                for (String str : suggestions) {
+                    suggestedWords.add(word + str);
+                }
+                return suggestedWords.toString();
             }
             characterSequence = characterSequence.get(word.charAt(i));
             foundWord.append(word.charAt(i));
@@ -37,9 +42,10 @@ public class Dictionary {
             // Word found, return the entire word
             return foundWord.toString();
         }
-        // Word Not found, return the list of suggested word
+        // Word not found, return the list of suggested words
         return this.suggestedWord(characterSequence).toString();
     }
+
 
     private void traverse(CharacterSequence characterSequence, StringBuilder prefix, List<String> suggestions) {
         if (characterSequence.isEnd()) {
